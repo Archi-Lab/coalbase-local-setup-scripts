@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-docker network inspect coalbase_backend &> /dev/null || docker network create coalbase_backend
+docker network inspect coalbase_backend &> /dev/null || docker network create coalbase_backend --scope swarm
 
 INF_CURRENT="$(pwd)"
 BE_CURRENT="$(pwd)"
@@ -15,12 +15,6 @@ if [ -d "$BE_DIR" ]; then
   BE_CURRENT="$BE_DIR"
 fi
 
-docker-compose \
-  -f "$INF_CURRENT"/coalbase-message-broker/docker-compose.yml \
-  -f "$BE_CURRENT"/coalbase-learning-outcome/src/main/docker/docker-compose.yml \
-  pull
-
-docker-compose -p coalbase \
-  -f "$INF_CURRENT"/coalbase-message-broker/docker-compose.yml \
-  -f "$BE_CURRENT"/coalbase-learning-outcome/src/main/docker/docker-compose.yml \
-  up -d
+docker stack deploy -c "$INF_CURRENT"/coalbase-message-broker/docker-compose.yml message-broker
+docker stack deploy -c "$INF_CURRENT"/coalbase-keycloak/docker-compose.yml keycloak
+docker stack deploy -c "$BE_CURRENT"/coalbase-learning-outcome/src/main/docker/docker-compose.yml learning-outcome

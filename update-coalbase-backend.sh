@@ -14,4 +14,5 @@ if [ -d "$BE_DIR" ]; then
 fi
 
 (cd "$INF_CURRENT"/coalbase-message-broker && pwd && git pull)
+(cd "$INF_CURRENT"/coalbase-keycloak && pwd && git pull)
 (cd "$BE_CURRENT"/coalbase-learning-outcome && pwd && git pull)

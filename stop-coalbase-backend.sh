@@ -13,9 +13,8 @@ if [ -d "$BE_DIR" ]; then
   BE_CURRENT="$BE_DIR"
 fi
 
-docker-compose -p coalbase \
-  -f "$INF_CURRENT"/coalbase-message-broker/docker-compose.yml \
-  -f "$BE_CURRENT"/coalbase-learning-outcome/src/main/docker/docker-compose.yml \
-  down
+docker stack rm message-broker
+docker stack rm keycloak
+docker stack rm learning-outcome
 
 docker network inspect coalbase_backend &> /dev/null && docker network rm coalbase_backend
