@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-docker network inspect coalbase_backend &> /dev/null || docker network create coalbase_backend --scope swarm
+docker network inspect coalbase_backend &> /dev/null || docker network create coalbase_backend --scope swarm --driver overlay
 
 INF_CURRENT="$(pwd)"
 BE_CURRENT="$(pwd)"
