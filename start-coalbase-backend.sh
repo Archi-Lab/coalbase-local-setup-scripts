@@ -15,6 +15,6 @@ if [ -d "$BE_DIR" ]; then
   BE_CURRENT="$BE_DIR"
 fi
 
-docker stack deploy -c "$INF_CURRENT"/coalbase-message-broker/docker-compose.yml message-broker
+docker stack deploy -c "$INF_CURRENT"/coalbase-message-broker/docker-compose.local.yml message-broker
 docker stack deploy --with-registry-auth -c "$INF_CURRENT"/coalbase-keycloak/docker-compose.yml -c "$INF_CURRENT"/coalbase-keycloak/docker-compose-local.yml keycloak
-docker stack deploy --with-registry-auth -c "$BE_CURRENT"/coalbase-learning-outcome/src/main/docker/docker-compose.yml -c "$BE_CURRENT"/coalbase-learning-outcome/src/main/docker/docker-compose-local.yml learning-outcome
+#docker stack deploy --with-registry-auth -c "$BE_CURRENT"/coalbase-learning-outcome/src/main/docker/docker-compose.yml -c "$BE_CURRENT"/coalbase-learning-outcome/src/main/docker/docker-compose-local.yml learning-outcome
